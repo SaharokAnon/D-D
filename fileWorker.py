@@ -1,4 +1,4 @@
-import os.path
+import os
 from os import path
 import json
 from character import Charecter
@@ -41,9 +41,18 @@ class FileWorker():
         self.fp.close()
         return True
 
-lol = Charecter(name='Дарнас', race='полурослик', clas='плут')
+    def getCharList(self):
+        files = []
+        files += os.listdir("chars/")
+        if len(files) == 0:
+            return False
+        else:
+            return files
+
+lol = Charecter(name='Debri', race='гном', clas='плут')
 lol.generate()
 fwLol = FileWorker(lol)
-fwLol.write_to_file()
-print(fwLol.char)
+#fwLol.write_to_file()
+fwLol.getCharList()
+#print(fwLol.char)
 #fwLol.read_from_file("Romass")
