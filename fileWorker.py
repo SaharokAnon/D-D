@@ -44,15 +44,12 @@ class FileWorker():
     def getCharList(self):
         files = []
         files += os.listdir("chars/")
-        if len(files) == 0:
-            return False
-        else:
-            return files
+        return files
 
-lol = Charecter(name='Debri', race='гном', clas='плут')
-lol.generate()
-fwLol = FileWorker(lol)
-#fwLol.write_to_file()
-fwLol.getCharList()
-#print(fwLol.char)
-#fwLol.read_from_file("Romass")
+# lol = Charecter(name='Debri', race='гном', clas='плут')
+# lol.generate()
+# fwLol = FileWorker(lol)
+# fwLol.write_to_file()
+# fwLol.getCharList()
+# print(fwLol.char)
+# fwLol.read_from_file("Romass")

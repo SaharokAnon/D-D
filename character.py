@@ -69,6 +69,6 @@ class Charecter():
         self.defscor()
 
 
-lol = Charecter(name='Дарнас', race='полурослик', clas='плут')
-lol.generate()
-print(lol)
+# lol = Charecter(name='Дарнас', race='полурослик', clas='плут')
+# lol.generate()
+# print(lol)
