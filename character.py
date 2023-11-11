@@ -5,7 +5,7 @@ class Charecter():
         self.name = name
         self.race = race
         self.clas = clas
-        self.mainscor = dict(сила=0,ловкость = 0,телосложение =0, инт =0,мудрость =0,харизма =0)  #сила, ловкость, телосложение, инт, мудрость, харизма
+        self.mainscor = [0,0,0,0,0,0]  #сила, ловкость, телосложение, инт, мудрость, харизма
         self.selfthrow = [0,0,0,0,0,0] #сила, ловкость, телосложение, инт, мудрость, харизма
         self.mhp = 0
         self.cd = 10
@@ -15,17 +15,22 @@ class Charecter():
          воин = dict(startScore = [3,2,2,-1,0,1], bestScore = [0,2], startMaxHp = 10),
          паладин = dict(startScore = [1,0,2,-1,3,2], bestScore = [4,5], startMaxHp = 10),
          лучник = dict(startScore = [2,3,1,-1,2,0], bestScore = [0,1], startMaxHp = 10),
-         плут = dict(startScore = [-1,3,0,2,1,2], bestScore = [1,3], startMaxHp = 8)
+         плут = dict(startScore = [-1,3,0,2,1,2], bestScore = [1,3], startMaxHp = 8),
+         человек = dict(addscor = [1,1,1,1,1,1]),
+         гном = dict(addscor = [0,0,0,2,0,0]),
+         эльф = dict(addscor = [0,2,0,0,0,0]),
+         полурослик = dict(addscor = [0,2,0,0,0,0])
          )
 #генерит основные характеристики
     def mainscorreset(self):
-        self.mainscor = self.scores[self.clas]['startScore']
+        for i in range(5):
+            self.mainscor[i] = self.scores[self.clas]['startScore'][i] + self.scores[self.race]['addscor'][i]
         return self.mainscor
 #генерит спасброски
     def selfthrowgen(self):
         self.selfthrow = self.mainscor
-        self.selfthrow[self.scores[self.clas]['bestScore'][0]] = self.selfthrow[0] + self.masterbonus
-        self.selfthrow[self.scores[self.clas]['bestScore'][1]] = self.selfthrow[0] + self.masterbonus
+        self.selfthrow[self.scores[self.clas]['bestScore'][0]] = self.selfthrow[self.scores[self.clas]['bestScore'][0]] + self.masterbonus
+        self.selfthrow[self.scores[self.clas]['bestScore'][1]] = self.selfthrow[self.scores[self.clas]['bestScore'][1]] + self.masterbonus
         return self.selfthrow
 #генерируем очки здоровья
     def mheltpoint(self):
@@ -48,7 +53,7 @@ class Charecter():
         self.cd = self.cd + self.mainscor[1]
         return self.cd
 
-lol = Charecter(name='Roma', race='Эльф', clas='воин')
+lol = Charecter(name='Roma', race='эльф', clas='воин')
 print(lol.mainscorreset())
 print(lol.selfthrowgen())
 print(lol.mheltpoint())
