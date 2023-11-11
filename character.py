@@ -5,11 +5,11 @@ class Charecter():
         self.name = name
         self.race = race
         self.clas = clas
-        self.mainscor = dict(сила =0,ловкость = 0,телосложение =0, инт =0,мудрость =0,харизма =0)  #сила, ловкость, телосложение, инт, мудрость, харизма
+        self.mainscor = dict(сила=0,ловкость = 0,телосложение =0, инт =0,мудрость =0,харизма =0)  #сила, ловкость, телосложение, инт, мудрость, харизма
         self.selfthrow = [0,0,0,0,0,0] #сила, ловкость, телосложение, инт, мудрость, харизма
         self.mhp = 0
         self.cd = 0
-        self.skil = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] #акробатика(лов)   анализ(инт)   атлетика (сил)   восприятие(муд)  выживание(муд)  выступление(хар)   запугивание (хар)    история(инт)  ловкость рук(лов)    магия(инт)   медицина(муд)   обман(хар)   природа(инт)   проницательность(муд)   религия(инт)   скрытность(лов)   убеждение(хар)    уход за животными(муд) 
+        self.skil = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] 
         self.masterbonus = 2
         self.scores = dict(
          воин = dict(startScore = [3,2,2,-1,0,1], bestScore = [0,2], startMaxHp = 10),
@@ -33,11 +33,20 @@ class Charecter():
         return self.mhp
     
     def skils(self):
-        self.skil[0] = self.mainscor[0]
+        self.skil[0] = self.mainscor[0] #сила: атлетика 
+        for i in range(3):
+            self.skil[i+1] = self.mainscor[1] #ловкость: акробатика, ловкость рук, скрытность
+        for i in range(5):
+            self.skil[i+4] = self.mainscor[3] #интеллект: анализ, история, магия, природа, религия
+        for i in range(4):
+            self.skil[i+9] = self.mainscor[4] #мудрость: восприятие, выживание, медицина, проницательность, уход за животными
+        for i in range(4):
+            self.skil[i+14] = self.mainscor[5] #харизма: выступление, запугивание, обман, убеждение
         return self.skil
 
 lol = Charecter(name='Roma', race='Эльф', clas='воин')
 print(lol.mainscorreset())
 print(lol.selfthrowgen())
 print(lol.mheltpoint())
+print(lol.skils())
 print(lol.name + " " +lol.clas)
