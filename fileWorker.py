@@ -6,25 +6,44 @@ from character import Charecter
 class FileWorker():
 
     def __init__(self, char = None):
-        if char is not None:
-            self.char = char
+        self.char = char
     
     def write_to_file(self):
-        charDict = {"title" : "CHARACTER", "data" : self.char.scores}
+        #Генерирует JSON для записи
+        if self.char is None:
+            #print("Иди заполни персонажа, куска дибил")
+            return False
+        charDict = {"title" : "CHARACTER", "name" : self.char.name, "race" : self.char.race,
+         "clas" : self.char.clas, "mainscor" : self.char.mainscor, "selfthrow" : self.char.selfthrow,
+         "mhp" : self.char.mhp, "cd" : self.char.cd, "skil" : self.char.skil, "masterbonus" : self.char.masterbonus}
         dmpdChar = json.dumps(charDict, ensure_ascii=False)
+
+        #Создает файл персонажа, если его нет. Заполняет файл персонажа JSON строкой
         self.fp = open("chars/" + self.char.name + ".dnd", 'w+')
         self.fp.write(dmpdChar)
-        fp.close()
+        self.fp.close()
+        return True
     
     def read_from_file(self, charName):
-        self.fp = open("chars/" + self.char.name + ".dnd", "r+")
+        #Если char уже объявлен - перезапишет его статы на новые в объекте
+        self.fp = open("chars/" + charName + ".dnd", "r+")
         tmp = self.fp.read()
         tmp = json.loads(tmp)
-        #print(self.fp.read())
-        print(tmp['title'])
-        self.fp.close()
 
-lol = Charecter(name='Romass', race='Эльф', clas='воин')
+        #Запись полученных статов
+        self.char = Charecter(name=tmp['name'],race=tmp['race'],clas=tmp['clas'])
+        self.char.mainscore = tmp['mainscor']
+        self.char.selfthrow = tmp['selfthrow']
+        self.char.mhp = tmp['mhp']
+        self.char.cd = tmp['cd']
+        self.char.skil = tmp['skil']
+        self.char.masterbonus = tmp['masterbonus']
+        self.fp.close()
+        return True
+
+lol = Charecter(name='Дарнас', race='полурослик', clas='плут')
+lol.generate()
 fwLol = FileWorker(lol)
-#fwLol.write_to_file()
-fwLol.read_from_file("Romass")
+fwLol.write_to_file()
+print(fwLol.char)
+#fwLol.read_from_file("Romass")

@@ -25,7 +25,7 @@ class Charecter():
                 f'Раса:{self.race}, '
                 f'Класс: {self.clas},'
                 f'ХП: {self.mhp},'
-                f'Навыки: {self.skil},')
+                f'Навыки: {self.skil}')
 #генерит основные характеристики
     def mainscorreset(self):
         for i in range(6):
@@ -68,6 +68,6 @@ class Charecter():
         self.skils()
         self.defscor()
 
-lol = Charecter(name='Дарнас', race='полурослик', clas='плут')
-lol.generate()
-print(lol)
+# lol = Charecter(name='Дарнас', race='полурослик', clas='плут')
+# lol.generate()
+# print(lol)
