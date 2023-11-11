@@ -8,7 +8,7 @@ class Charecter():
         self.mainscor = dict(сила=0,ловкость = 0,телосложение =0, инт =0,мудрость =0,харизма =0)  #сила, ловкость, телосложение, инт, мудрость, харизма
         self.selfthrow = [0,0,0,0,0,0] #сила, ловкость, телосложение, инт, мудрость, харизма
         self.mhp = 0
-        self.cd = 0
+        self.cd = 10
         self.skil = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] 
         self.masterbonus = 2
         self.scores = dict(
@@ -27,11 +27,11 @@ class Charecter():
         self.selfthrow[self.scores[self.clas]['bestScore'][0]] = self.selfthrow[0] + self.masterbonus
         self.selfthrow[self.scores[self.clas]['bestScore'][1]] = self.selfthrow[0] + self.masterbonus
         return self.selfthrow
-
+#генерируем очки здоровья
     def mheltpoint(self):
         self.mhp = self.scores[self.clas]['startMaxHp']
         return self.mhp
-    
+#генерируем навыки
     def skils(self):
         self.skil[0] = self.mainscor[0] #сила: атлетика 
         for i in range(3):
@@ -43,10 +43,15 @@ class Charecter():
         for i in range(4):
             self.skil[i+14] = self.mainscor[5] #харизма: выступление, запугивание, обман, убеждение
         return self.skil
+#очки защиты
+    def defscor(self):
+        self.cd = self.cd + self.mainscor[1]
+        return self.cd
 
 lol = Charecter(name='Roma', race='Эльф', clas='воин')
 print(lol.mainscorreset())
 print(lol.selfthrowgen())
 print(lol.mheltpoint())
 print(lol.skils())
+print(lol.defscor())
 print(lol.name + " " +lol.clas)
