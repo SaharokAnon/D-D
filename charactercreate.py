@@ -11,7 +11,8 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.dropdown import DropDown
 
-
+from character import Charecter
+from fileWorker import FileWorker
 
 
 class CharacterCreatorApp(App):
@@ -134,5 +135,9 @@ class CharacterCreatorApp(App):
         self.root.remove_widget(self.class_button)
         if character_name and character_class != 'Выберите класс':
             print(f"Персонаж {character_name} создан! Класс: {character_class}! Раса:{character_ras}!")
+            char = Charecter(name = character_name, clas = character_class.lower(), race=character_ras.lower())
+            char.generate()
+            fw = FileWorker(char)
+            fw.write_to_file()
         else:
             print("Введите имя персонажа и выберите класс.")

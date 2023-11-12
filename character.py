@@ -67,8 +67,3 @@ class Charecter():
         self.mheltpoint()
         self.skils()
         self.defscor()
-
-
-# lol = Charecter(name='Дарнас', race='полурослик', clas='плут')
-# lol.generate()
-# print(lol)

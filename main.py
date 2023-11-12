@@ -2,7 +2,7 @@ from character import Charecter
 from fileWorker import FileWorker
 from charactercreate import CharacterCreatorApp
 
-char
+
 fw = FileWorker()
 
 charList = fw.getCharList()
